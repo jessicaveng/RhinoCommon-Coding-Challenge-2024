@@ -6,10 +6,13 @@ Welcome to XFrame's RhinoCommon Coding Challenge! The aim of the challenge, beyo
 
 The repo has a passing Rhino3D plugin, you're tasked with adding the following functionality to the plugin:
 
-- incrementally create geometry in the model space as a `block`
-- delete the last `block` created
-- delete all of the `blocks` created
-- report the current number of `blocks` that exist in the model space
+- incrementally create a 92x1200x2400mm (width, length, height) box in the Rhino model space as a `block`. Each box should be spaced 2000mm edge-to-edge from the previous box along the `x-axis`
+
+![image](https://github.com/X-Frame/RhinoCommon-Coding-Challenge-2024/assets/81334853/1040738e-ae45-4491-b42d-b21f10de60e2)
+
+- delete the last `box`/`block` created
+- delete all of the `boxes`/`blocks` created
+- report the current number of `boxes`/`blocks` that exist in the model space
 - update `README.md` to include a paragraph that briefly explains what you implemented, as well as an estimate of how long you took.
 
 The above functionality should be wrapped in some form of user-interface. We've included a blank WinForms form as a kickstarter, but you are welcome to use a different UI library like WPF or Eto if you're more familiar with those. You are also welcome to take a different approach to how a someone could use your plugin, i.e. buttons/commands.
