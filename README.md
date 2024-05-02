@@ -1,6 +1,6 @@
 # XFrame RhinoCommon-Coding-Challenge-2024
 
-Welcome to XFrame's RhinoCommon Coding Challenge! The aim of the challenge, beyond the standard stuff like how you apporach problems and write code, is to give you an opportuntiy to work with Rhino, the RhinoCommon API, and a taste of the work you could be expected to do. The challenge isn't suppose to be difficult or time consuming, and we've setup the repo so you can skip most of the boiler plate.
+Welcome to XFrame's RhinoCommon Coding Challenge! The aim of the challenge, beyond the standard stuff like how you apporach problems and write code, is to give you an opportuntiy to work with Rhino, the RhinoCommon API, and a taste of the work you could be expected to do. The challenge isn't supposed to be difficult or time consuming, and we've setup the repo so you can skip most of the boiler plate.
 
 ### Challenge:
 
@@ -43,7 +43,7 @@ The inverse process is used to get access to existing objects i.e. `Rhino.DocObj
 
  - **Redraw** Changes to the document such as adding/removing/transforming require the document viewport(s) to be refreshed. Using the above example of `AddPoint()` you call `Rhino.RhinoDoc.ActiveDoc.View.Redraw()`.
 
- - **Blocks versus InstanceDefinition versuse InstanceObject**: A `block` is a specific concept in [Rhino](https://www.rhino3d.com/features/blocks/) and many other CAD/3D software. Within RhinoCommon blocks are referred to as `instances`. You can find info on blocks/instances in RhinoCommon [here](https://developer.rhino3d.com/api/rhinocommon/rhino.geometry.instancedefinitiongeometry). This [sample](https://github.com/mcneel/rhino-developer-samples/blob/8/rhinocommon/cs/SampleCsCommands/SampleCsBlock.cs) shows how to create a block. You can read this article about how blocks instances are implemented in Rhino [here](https://developer.rhino3d.com/guides/opennurbs/traverse-instance-definitions/). Generally though instances follow the same logic outlined above in **Geometry vs. RhinoObjects**:
+ - **Blocks vs InstanceDefinition vs InstanceObject**: A `block` is a specific concept in [Rhino](https://www.rhino3d.com/features/blocks/) and many other CAD/3D software. Within RhinoCommon blocks are referred to as `instances`. You can find info on blocks/instances in RhinoCommon [here](https://developer.rhino3d.com/api/rhinocommon/rhino.geometry.instancedefinitiongeometry). This [sample](https://github.com/mcneel/rhino-developer-samples/blob/8/rhinocommon/cs/SampleCsCommands/SampleCsBlock.cs) shows how to create a block. You can read this article about how blocks instances are implemented in Rhino [here](https://developer.rhino3d.com/guides/opennurbs/traverse-instance-definitions/). Generally though instances follow the same logic outlined above in **Geometry vs. RhinoObjects**:
 
    - `Rhino.Geometry.InstanceDefinitionGeometry`: For manipulating definition geometry
    - `Rhino.Geometry.InstanceReferenceGeometry`: For manipulating reference geometry
