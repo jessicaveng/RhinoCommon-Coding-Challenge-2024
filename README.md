@@ -19,7 +19,7 @@ The above functionality should be wrapped in some form of user-interface. We've 
 
 The above functionality is the minimum -- feel free to add other features or functionality that you think would be interesting or improve the plugin. Some things to consider could be Rhino stuff like geometry naming, reporting other information like area or location, or coding stuff like tests, documentation, ci/cd.  
 
-### 👉 Kick-off by forking this repo. When you're finished share with us your repo and we'll review your work. Try have fun with it!
+### 👉 Kick-off by cloning this repo. When you're finished share your repo for us to review. Try have fun with it!
 
 We're interested in what you can achieve in a reasonable timeframe. If you're not able to complete all of the functionality within a reasonable time then submit wherever you get too -- we'll leave it up to you decide how little or long you want to spend on the challenge. If you're having issues specifically with Rhino or RhinoCommon itself, you can contact luke@xframe.com.au and we'll try assist -- we don't want you to spend time troubleshooting Rhino issues.
 
