@@ -1,6 +1,6 @@
 # XFrame RhinoCommon-Coding-Challenge-2024
 
-Welcome to XFrame's RhinoCommon Coding Challenge! The aim of the challenge, beyond the standard stuff like how you apporach problems and write code, is to give you an opportuntiy to work with Rhino, the RhinoCommon API, and a taste of the work you could be expected to do. The challenge isn't supposed to be difficult or time consuming, and we've setup the repo so you can skip most of the boiler plate.
+Welcome to XFrame's RhinoCommon Coding Challenge! The aim of the challenge, beyond the standard stuff like how you approach problems and write code, is to give you an opportunity to work with Rhino, the RhinoCommon API, and a taste of the work you could be expected to do. The challenge isn't supposed to be difficult or time consuming, and we've setup the repo so you can skip most of the boiler plate.
 
 ### Challenge:
 
@@ -62,5 +62,26 @@ __What is Eto?__
 **Rhino** You can download a 90-day trial of Rhino8 via (https://www.rhino3d.com/download/). We use Rhino on windows and for this exercise most computers should be able to run Rhino.
 
 **IDE** We use VisualStudio Community 2022 but you're welcome to use your IDE of choice.
+
+----------------------------------------------------------------------------------------------------------------------------
+**What was implemented**
+### Plugin Functionality
+
+This plugin allows users to incrementally create 92x1200x2400mm boxes in the Rhino model space. Each box is spaced 2000mm from the previous box along the x-axis. The plugin provides the following functionalities:
+- Create a new box
+- Delete the last created box
+- Delete all created boxes
+- Report the current number of boxes in the model space
+
+The plugin includes a user interface implemented using WinForms. The UI provides buttons for creating boxes, deleting the last box, deleting all boxes, and displaying the current box count.
+
+#### Output Snippet
+![image](./plugIn_snippet.png)
+
+### Estimated Time Taken
+Estimated time: 6 hours
+Actual time it took: 2-4 hours, the 2nd attempt after setting up the repo on windows machine
+- 1st attempt: Encoutered a blocker on my macBook so abit of time was lost to debugging vscode build failure
+- 2nd attempt: Successfully set up the repo and able to run build in vscode
 
 
