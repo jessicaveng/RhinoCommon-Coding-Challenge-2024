@@ -1,68 +1,97 @@
-﻿using Rhino;
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Windows.Forms;
+using Rhino;
+using Rhino.DocObjects;
 using Rhino.Commands;
 using Rhino.Geometry;
-using Rhino.Input;
 using Rhino.Input.Custom;
 
 namespace MyRhinoPlugin
 {
-    public class MyRhinoCommand : Command
+ public class MyRhinoCommand : Command
     {
         public MyRhinoCommand()
         {
-            // Rhino only creates one instance of each command class defined in a
-            // plug-in, so it is safe to store a reference in a static property.
             Instance = this;
         }
 
-        ///<summary>The only instance of this command.</summary>
         public static MyRhinoCommand Instance { get; private set; }
 
-        ///<returns>The command name as it appears on the Rhino command line.</returns>
         public override string EnglishName => "MyRhinoCommand";
 
         protected override Result RunCommand(RhinoDoc doc, RunMode mode)
         {
-            // TODO: start here modifying the behaviour of your command.
-            // ---
             Form1 form = new Form1();
             form.ShowDialog();
 
-            RhinoApp.WriteLine("The {0} command will add a line right now.", EnglishName);
-
-            Point3d pt0;
-            using (GetPoint getPointAction = new GetPoint())
-            {
-                getPointAction.SetCommandPrompt("Please select the start point");
-                if (getPointAction.Get() != GetResult.Point)
-                {
-                    RhinoApp.WriteLine("No start point was selected.");
-                    return getPointAction.CommandResult();
-                }
-                pt0 = getPointAction.Point();
-            }
-
-            Point3d pt1;
-            using (GetPoint getPointAction = new GetPoint())
-            {
-                getPointAction.SetCommandPrompt("Please select the end point");
-                getPointAction.SetBasePoint(pt0, true);
-                getPointAction.DynamicDraw +=
-                  (sender, e) => e.Display.DrawLine(pt0, e.CurrentPoint, System.Drawing.Color.DarkRed);
-                if (getPointAction.Get() != GetResult.Point)
-                {
-                    RhinoApp.WriteLine("No end point was selected.");
-                    return getPointAction.CommandResult();
-                }
-                pt1 = getPointAction.Point();
-            }
-
-            doc.Objects.AddLine(pt0, pt1);
-            doc.Views.Redraw();
-            RhinoApp.WriteLine("The {0} command added one line to the document.", EnglishName);
-
-            // ---
             return Result.Success;
+        }
+
+        public static void CreateBox(RhinoDoc doc, List<Guid> boxIds, ref int boxCount)
+        {
+            double boxWidth = 92;
+            double boxLength = 1200;
+            double boxHeight = 2400;
+            double spacing = 2000;
+
+            // Calculate the location for the new box
+            double x = boxCount * (boxWidth + spacing);
+            Point3d basePoint = new Point3d(x, 0, 0);
+
+            // Create the box geometry
+            Box box = new Box(Plane.WorldXY, new Interval(0, boxWidth), new Interval(0, boxLength), new Interval(0, boxHeight));
+            Brep boxBrep = box.ToBrep();
+
+            // Create a block definition if it doesn't exist
+            string blockName = "MyBoxBlock";
+            if (doc.InstanceDefinitions.Find(blockName) == null)
+            {
+                var objects = new List<GeometryBase> { boxBrep };
+                var attributes = new List<ObjectAttributes> { new ObjectAttributes { Name = blockName } };
+                doc.InstanceDefinitions.Add(blockName, "Box Block Definition", basePoint, objects, attributes);
+            }
+
+            // Insert the block instance
+            int blockIndex = doc.InstanceDefinitions.Find(blockName).Index;
+            Transform transform = Transform.Translation(new Vector3d(basePoint));
+            Guid blockInstanceId = doc.Objects.AddInstanceObject(blockIndex, transform);
+
+            if (blockInstanceId != Guid.Empty)
+            {
+                boxIds.Add(blockInstanceId);
+                boxCount++;
+                doc.Views.Redraw();
+            }
+        }
+
+        public static void DeleteLastBox(RhinoDoc doc, List<Guid> boxIds, ref int boxCount)
+        {
+            if (boxIds.Count > 0)
+            {
+                Guid lastBoxId = boxIds[boxIds.Count - 1];
+                doc.Objects.Delete(lastBoxId, true);
+                boxIds.RemoveAt(boxIds.Count - 1);
+                boxCount--;
+                doc.Views.Redraw();
+            }
+        }
+
+        public static void DeleteAllBoxes(RhinoDoc doc, List<Guid> boxIds, ref int boxCount)
+        {
+            foreach (var id in boxIds)
+            {
+                doc.Objects.Delete(id, true);
+            }
+            boxIds.Clear();
+            boxCount = 0;
+            doc.Views.Redraw();
+        }
+
+        public static int GetBoxCount(List<Guid> boxIds)
+        {
+            return boxIds.Count;
         }
     }
 }
