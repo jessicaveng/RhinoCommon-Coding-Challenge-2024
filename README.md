@@ -79,9 +79,7 @@ The plugin includes a user interface implemented using WinForms. The UI provides
 ![image](./plugIn_snippet.png)
 
 ### Estimated Time Taken
-Estimated time: 6 hours
-Actual time it took: 2-4 hours, the 2nd attempt after setting up the repo on windows machine
 - 1st attempt: Encoutered a blocker on my macBook so abit of time was lost to debugging vscode build failure
 - 2nd attempt: Successfully set up the repo and able to run build in vscode
-
-
+Estimated time: 6 hours
+Actual time it took: 2-4 hours, the 2nd attempt after setting up the repo on windows machine
